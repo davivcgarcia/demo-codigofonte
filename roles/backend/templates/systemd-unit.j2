@@ -1,0 +1,12 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description=Deno Backend Service
+
+[Service]
+WorkingDirectory={{ backend_deploy_dest }}
+ExecStart=/usr/local/bin/deno run {{ backend_runtime_args }} {{ backend_entrypoint }}
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

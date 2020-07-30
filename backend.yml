@@ -1,0 +1,6 @@
+---
+- name: Implantar backend
+  hosts: backend
+  become: yes
+  roles:
+  - backend

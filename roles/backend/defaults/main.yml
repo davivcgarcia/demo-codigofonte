@@ -1,0 +1,10 @@
+---
+backend_deno_version: v1.2.0
+backend_required_packages:
+- unzip
+backend_deploy_dest: /srv/backend
+backend_src_path: app-src/api/
+backend_entrypoint: app.ts
+backend_runtime_args: --allow-read --allow-net
+backend_bind_address: 0.0.0.0
+backend_bind_port: 8080

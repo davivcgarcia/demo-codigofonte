@@ -1,0 +1,6 @@
+---
+- name: Reiniciar serviço de backend
+  systemd:
+    name: deno-backend.service
+    state: restarted
+    daemon_reload: yes

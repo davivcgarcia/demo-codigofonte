@@ -1,0 +1,31 @@
+---
+- name: Verifica componente frontend
+  hosts: frontend
+  gather_facts: no
+  vars:
+    frontend_bind_port: 80
+  tasks:
+  - name: Executando requisição HTTP
+    uri:
+      url: "http://{{ ansible_host }}:{{ frontend_bind_port }}"
+      return_content: yes
+    register: response
+    failed_when: "'<h1>Youtube Chapter Extractor</h1>' not in response.content"
+    retries: 3
+    delay: 3
+    until: response.status == 200
+
+- name: Verifica componente backend
+  hosts: backend
+  vars:
+    backend_bind_port: 8080
+  gather_facts: no
+  tasks:
+  - name: Executando requisição HTTP
+    uri:
+      url: "http://{{ ansible_host }}:{{ backend_bind_port }}/api/v1/video-chapters/notreal"
+    register: response
+    retries: 3
+    delay: 3
+    until: response.status == 200
+    
